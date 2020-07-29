@@ -1,27 +1,42 @@
 html {
   height: 100%;
-  margin: 10px;
+  margin: 20px;
 }
 
 body {
+  background-color: #efe4f2;
+  /* background-color: #e0efff; */
   height: 80%;
   width: 70%;
   margin: auto;
   color: #666565;
+}
+button {
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.shopping-list {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  -webkit-box-shadow: 4px 5px 12px -5px rgba(194, 194, 194, 1);
+  -moz-box-shadow: 4px 5px 12px -5px rgba(194, 194, 194, 1);
+  border-radius: 15px;
+  /* to apply shadow on border radius not on squarex */
+  box-shadow: 4px 5px 12px -5px rgba(194, 194, 194, 1);
 }
 
 .header {
-  flex: 0 0 auto;
   height: 50px;
   color: #fff;
   font-size: 30px;
   text-align: center;
   border-radius: 15px 15px 0 0;
   padding: 10px 0px 2px 0px;
-}
-.title {
   vertical-align: middle;
 }
 
@@ -34,42 +49,58 @@ body {
     rgba(129, 200, 222, 1) 100%
   );
 }
-.item-container {
-  flex: 1 0 auto;
-  background-color: #f0f0f0;
-}
-.item-container ul {
+
+ul.item-list {
+  flex: 1;
   list-style: none;
   margin: 0;
   font-size: 20px;
   background-color: #f5f5f5;
-  padding: 0;
-  /* padding: 5px 10px; */
+  /* padding: 20px 15px; */
+  padding: 20px 0px;
+  overflow-y: auto;
 }
-.item-list li {
-  padding: 5px 10px 5px 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+.item-row {
+  padding: 5px 10px;
+  /* padding: 5px 10px 5px 10px; */
   vertical-align: middle;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  vertical-align: middle;
+
+  width: 90%;
+  margin: auto;
+  padding: 3px 2px;
+}
+.item-divider {
+  width: 95%;
+  margin: auto;
+  height: 1px;
+  background-color: #dde7eb;
+  /* since div is a block level, automatically has right margin */
+  /* margin-bottom: 7px; */
+  /* to set the margin s.t. item goes into the middle */
 }
 .item-list li:hover {
   background-color: #f1d7f5;
 }
 .item-delete-icon {
+  font-size: 18px;
   color: #81c8de;
-  cursor: pointer;
+  /* cursor: pointer; */
+  transition: all 300ms ease-in;
 }
 .item-delete-icon:hover {
   color: #df19fc;
+  transform: scale(1.1);
 }
 .stroked {
   /* finished todo */
   text-decoration: line-through;
-}
-
-.bottom {
-  flex: 0 0 auto;
 }
 
 .footer {
@@ -77,13 +108,14 @@ body {
   text-align: center;
   height: 85px;
   line-height: 30px;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0px 0px 15px 15px;
 }
 .input-text {
   width: 100%;
   height: 35px;
   background-color: #fcfafa;
   border: 2px solid #f1d7f5;
+  outline: none;
   color: #81c8de;
   padding: 7px;
   box-sizing: border-box;
@@ -108,4 +140,25 @@ body {
   border-radius: 50%;
   vertical-align: middle;
   cursor: pointer;
+  transition: transform 200ms ease-in;
+}
+.add-icon:hover {
+  transform: scale(1.1);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  /* border-radius: 10px; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e7c2f2;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e6b5f4;
 }

@@ -11,35 +11,46 @@
       integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
       crossorigin="anonymous"
     />
-
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="header linear-gradient">
-      <span class="title">
+    <section class="shopping-list">
+      <header class="header linear-gradient">
         Shopping List
-      </span>
-    </header>
-    <div class="item-container">
+      </header>
       <ul class="item-list">
-        <li>
-          <span class="item-text">milk</span>
-          <i class="fas fa-trash-alt item-delete-icon"></i>
+        <li class="item-row">
+          <div class="item">
+            <span class="item-text">milk</span>
+            <button class="item-delete-icon">
+              <i class="fas fa-trash-alt "></i>
+            </button>
+          </div>
+          <div class="item-divider"></div>
         </li>
-        <li>
-          <span class="item-text">pineapple</span>
-          <i class="fas fa-trash-alt item-delete-icon"></i>
+        <li class="item-row">
+          <div class="item">
+            <span class="item-text">pineapple</span>
+            <button class="item-delete-icon">
+              <i class="fas fa-trash-alt "></i>
+            </button>
+          </div>
+          <div class="item-divider"></div>
         </li>
-        <li>
-          <span class="item-text">apple</span>
-          <i class="fas fa-trash-alt item-delete-icon"></i>
+        <li class="item-row">
+          <div class="item">
+            <span class="item-text">apple</span>
+            <button class="item-delete-icon">
+              <i class="fas fa-trash-alt "></i>
+            </button>
+          </div>
+          <div class="item-divider"></div>
         </li>
       </ul>
-      <div class=""></div>
-    </div>
-    <footer class="bottom footer linear-gradient">
-      <input class="input-text" type="text" />
-      <span class="add-icon">+</span>
-    </footer>
+      <footer class="footer linear-gradient">
+        <input class="input-text" type="text" />
+        <span class="add-icon">+</span>
+      </footer>
+    </section>
   </body>
 </html>
