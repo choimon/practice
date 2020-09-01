@@ -1,25 +1,9 @@
+// sound
+// bg : Games Worldbeat by Bernardo R.   // https://mixkit.co/free-stock-music/
+// everything else by https://freesound.org/
+
 const bg = document.querySelector('.bg');
 const gg = document.querySelector('.bg .game-ground');
-
-// const ggY0 = 0.57; // startY
-// const ggY1 = 1;
-// const ggX0 = 0;
-// const ggX1 = 1;
-
-// const bgHeight = bg.clientHeight; // in px or same unit as iconWidth
-// const bgWidth = bg.clientWidth;
-// console.log(`bgHeight: ${bgHeight}, bgWidth: ${bgWidth}`);
-// const ggHeight = gg.clientHeight * (ggY1 - ggY0); // in px or same unit as iconWidth
-// const ggWidth = gg.clientWidth * (ggX1 - ggX0);
-// console.log(`ggHeight: ${ggHeight}, ggWidth: ${ggWidth}`);
-
-// gg.style.position = 'absolute';
-// gg.style.width = ggWidth + 'px';
-// gg.style.height = ggHeight + 'px';
-// gg.style.left = bgWidth * ggX0 + 'px';
-// gg.style.top = bgHeight * ggY0 + 'px';
-
-// to do querySelector?
 
 var ggWidth = 0;
 var ggHeight = 0;
@@ -62,6 +46,11 @@ const levelTextElt = document.querySelector('.level .level-txt');
 const levelPopUpElt = document.querySelector('.level .level-popup');
 const levelPopUpLineElt = document.querySelector('.level .line');
 
+var catchSound;
+var winSound;
+var failSound;
+var bgSound;
+
 function calculateGGPosition() {
   const ggY0 = 0.62; // startY
   const ggY1 = 0.98;
@@ -83,11 +72,44 @@ function calculateGGPosition() {
   gg.style.left = bgWidth * ggX0 + 'px';
   gg.style.top = bgHeight * ggY0 + 'px';
 }
-function eventInitialize() {
+
+function sound(src) {
+  const audioElt = document.createElement('audio');
+  audioElt.src = src;
+  audioElt.setAttribute('preload', 'auto');
+  audioElt.setAttribute('controls', 'none');
+  audioElt.style.display = 'none';
+  return document.body.appendChild(audioElt);
+
+  // this.play = function() {
+  //   this.sound.play();
+  // };
+  // this.stop = function() {
+  //   this.sound.pause();
+  // };
+}
+
+function soundInit() {
+  const catchSoundSrc = './sound/success_jingle.wav';
+  const winSoundSrc = './sound/win.wav';
+  const failSoundSrc = './sound/game_die.mp3';
+  const bgSoundSrc = './sound/bg.mp3';
+
+  catchSound = sound(catchSoundSrc);
+  failSound = sound(failSoundSrc);
+  winSound = sound(winSoundSrc);
+  bgSound = sound(bgSoundSrc);
+}
+
+function eventInit() {
   bg.addEventListener('click', (event) => {
+    if (event.target.parentElement === null) {
+      return;
+    }
     if (
-      event.target.parentElement.id != 'level' &&
-      event.target.parentElement.parentElement.id != 'level'
+      event.target.parentElement.id != 'level' ||
+      (event.target.parentElement.parentElement !== null &&
+        event.target.parentElement.parentElement.id != 'level')
     ) {
       hideLevelBox();
     }
@@ -99,6 +121,8 @@ function eventInitialize() {
       return;
     }
     if (event.target.hasAttribute('data-carrot')) {
+      catchSound.currentTime = 0;
+      catchSound.play();
       gg.removeChild(event.target);
       carrotCount--;
       console.log(`carrotCount: ${carrotCount}`);
@@ -128,7 +152,8 @@ function initialize() {
   bugHeight = bugInitElt.computedStyleMap().get('height').value;
   bugInitElt.remove();
 
-  eventInitialize();
+  soundInit();
+  eventInit();
 }
 
 function getX(rand, iconWidth) {
@@ -195,18 +220,6 @@ function createBug() {
   gg.appendChild(bugElt);
 }
 
-function gameSuccess() {
-  isPlaying = false;
-  stopTimer();
-  showResult('YOU WON 🎉');
-}
-
-function gameFail() {
-  isPlaying = false;
-  stopTimer();
-  showResult('YOU LOST 💩');
-}
-
 function getRandInt(min, max) {
   //[min, max]
   // [3,7]
@@ -238,21 +251,43 @@ function stopTimer() {
   clearInterval(timerInterval);
 }
 
+function playGame() {
+  isPlaying = true;
+  bgSound.play();
+  startTimer();
+  timerInterval = setInterval(startTimer, 1000);
+}
+
+function stopGame() {
+  isPlaying = false;
+  bgSound.pause();
+  stopTimer();
+}
+
+function gameSuccess() {
+  stopGame();
+  winSound.play();
+  showResult('YOU WON 🎉');
+}
+
+function gameFail() {
+  stopGame();
+  failSound.play();
+  showResult('YOU LOST 💩');
+}
+
 function togglePlayBtn() {
   console.log(`toggle playbtnnnn ${isPlaying}`);
   if (isPlaying) {
     // want to stop
     pauseBtnElt.style.display = 'none';
     playBtnElt.style.display = 'block';
-    stopTimer();
-    isPlaying = false;
+    stopGame();
   } else {
     //want to play
     playBtnElt.style.display = 'none';
     pauseBtnElt.style.display = 'block';
-    isPlaying = true;
-    startTimer();
-    timerInterval = setInterval(startTimer, 1000);
+    playGame();
   }
 }
 function hideLevelBox() {
@@ -326,9 +361,16 @@ function hideResult() {
 function restartGame() {
   gg.textContent = ''; //https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
   hideResult();
+  failSound.pause();
+  winSound.pause();
+  bgSound.currentTime = 0;
   gameInit(level);
 }
 
 // draw bugs first and then carrots
-initialize();
-gameInit(level);
+
+document.addEventListener('DOMContentLoaded', function(event) {
+  // your code here
+  initialize();
+  gameInit(level);
+});
