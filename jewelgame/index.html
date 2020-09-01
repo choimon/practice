@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <title>Carrot Game</title>
+  </head>
+  <body>
+    <div class="bg">
+      <div class="game-ground">
+        <!-- <img class="bug-orig" src="./img/bug.png" /> -->
+        <!-- <img src="img/carrot.png" alt="" class="carrot-orig" /> -->
+      </div>
+      <div class="carrot carrot-init"></div>
+      <div class="bug bug-init"></div>
+      <div class="level" id="level">
+        <div class="level-popup hide">
+          <span
+            class="level-icon l1 selected"
+            onclick="selectLevel(1)"
+            data-id="1"
+            >1</span
+          >
+          <span class="level-icon l2" onclick="selectLevel(2)" data-id="2"
+            >2</span
+          >
+          <span class="level-icon l3" onclick="selectLevel(3)" data-id="3"
+            >3</span
+          >
+          <span class="level-icon l4" onclick="selectLevel(4)" data-id="4"
+            >4</span
+          >
+          <span class="level-icon l5" onclick="selectLevel(5)" data-id="5"
+            >5</span
+          >
+        </div>
+        <div class="line hide"></div>
+        <span class="level-txt btn-2" onclick="toggleLevelBox()">Level 1</span>
+      </div>
+      <div class="play-btn btn-1" onclick="togglePlayBtn()">
+        <i class="fas fa-play"></i>
+        <i class="fas fa-stop"></i>
+      </div>
+      <div class="timer">00:00</div>
+      <div class="counter btn-3">0</div>
+      <div class="result">
+        <div class="icon btn-1" onclick="restartGame()">
+          <i class="fas fa-redo redo"></i>
+        </div>
+        <div class="msg"></div>
+      </div>
+    </div>
+  </body>
+</html>

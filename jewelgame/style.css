@@ -1,0 +1,239 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 20px;
+  padding: 0;
+  background-color: #39a6bd;
+}
+.bg {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-image: url('./img/background.png');
+  background-repeat: no-repeat;
+  /* background-size: contain; */
+  background-size: 800px 800px;
+  /* background-position-x: center; */
+  background-position: 50% 50%;
+  width: 800px;
+  height: 800px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .game-ground {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+.bug {
+  width: 50px;
+  height: 50.1px;
+  position: absolute;
+  /* div.clientHeight */
+  /* transform: translate(0ctr, calc(100% - 50px)); */
+  /*
+  transform: translate(0, -50px); for the 100% top 
+  transform: translate(-50px, -50px); top100 left 100
+  transform: translate(-50px, 0); top0 left 100
+  transform: translate(0, 0); top0 left0
+
+
+  top: max(calc(% - 50px), 0px)  // - height
+  left: max(calc(% - 50px),0px)  // -width
+  if (top - 100 ==0) 
+  */
+  /* 
+  top: [300, 505]
+  left: [0,950]
+  */
+}
+
+.carrot-init {
+  display: none;
+}
+.bug-init {
+  display: none;
+}
+
+.carrot {
+  width: 35px;
+  height: 30.42px;
+  position: absolute;
+}
+
+/* text-align: center; (when working with inline elements) or
+ margin: 0 auto; (when working with block element).  */
+
+.btn-1 {
+  background-color: #e3eba2;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  color: #366976;
+}
+
+/* #005248 */
+.btn-2 {
+  /* background-color: #e4aa45; */
+  background-color: #e1a131;
+  color: #fafaed;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+}
+
+.btn-3 {
+  background-color: #39a6bd;
+  color: #e3eba2;
+}
+
+.level {
+  margin-top: 15px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: calc(100% - 10px);
+  transform: translateX(-100%);
+
+  display: flex;
+  align-items: center;
+  /* display: inline-flex; */
+  /* flex-direction: row-reverse; */
+  /* flex-wrap: wrap; */
+}
+.level .level-txt {
+  /* margin-left: 7px; */
+  font-size: 25px;
+  display: block;
+  width: 80px;
+  border-radius: 5px;
+  padding: 0.5px 5px;
+}
+.level .level-popup {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: space-around;
+  z-index: 3;
+  background-color: rgba(134, 73, 13, 0.45);
+
+  width: 150px;
+  height: 30px;
+  position: absolute;
+  border-radius: 5px;
+  transform: translateX(-100%);
+}
+
+.level .line {
+  width: 0.8em;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.hide {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}
+.level .level-icon {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* text-align: center; */
+  border-radius: 5px;
+  background-color: #007288;
+  /* background-color: #99aab5; */
+  color: #fafaed;
+}
+
+.level .selected {
+  background-color: #e1a131;
+}
+
+.play-btn {
+  margin-top: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.play-btn .fa-play {
+  display: block;
+}
+.play-btn .fa-stop {
+  display: none;
+}
+
+.timer {
+  margin-top: 5px;
+  width: 150px;
+  height: 40px;
+  background-color: #fafaed;
+  color: #86490d;
+  /* background-color: rgb(225, 161, 49, 0.4); */
+  border-radius: 5px;
+  border: 2px solid rgb(225, 161, 49, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  /* text-align: center;
+  vertical-align: middle;  doesn't work */
+}
+.counter {
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  /* background-color: orange; */
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  /* color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.result {
+  margin-top: 150px;
+  display: none; /* display:flex;  */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(54, 105, 118, 0.85);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* background-color: white; 
+  opacity: 0.5;*/
+  width: 400px;
+  height: 120px;
+  border-radius: 15px;
+  z-index: 1000;
+}
+
+.result .icon {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center; /* horizontal align*/
+  align-items: center; /* vertical align*/
+  /* text-align: center; */
+}
+
+.result .msg {
+  font-size: 40px;
+  color: #fafaed;
+}
+/* .result .icon .redo {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+} */
